@@ -1,0 +1,85 @@
+# Product Requirements Document (PRD)
+## HoneyBook Clone – MVP
+
+### 1. Invoices
+**Description:** Allow users to create professional invoices efficiently.
+
+**Features:**
+- Itemized list of services/products (description, quantity, unit price, total).
+- Support payment schedules, including deposits and installment payments.
+- Automated email reminders for upcoming and overdue payments.
+- Auto-saved item bank for frequently used invoice items.
+- Utilize shadcn UI components for tables, forms, buttons, and modals.
+
+---
+
+### 2. Proposals
+**Description:** Streamline the client booking process by combining invoices, contracts, and payment options into one branded document.
+
+**Features:**
+- Consolidation of invoices, contracts, and payment terms.
+- Professional, customizable branding (logo, colors, typography).
+- Real-time tracking for proposal statuses (viewed, signed, paid).
+- Use shadcn UI components for document views, status badges, and notification banners.
+
+---
+
+### 3. Contracts
+**Description:** Digitally create and manage legally binding contracts.
+
+**Features:**
+- Secure electronic signature integration.
+- Smart fields to auto-fill client and project-specific information.
+- Automatic notifications for document views and completed signatures.
+- Leverage shadcn UI components for form inputs, progress indicators, and notification alerts.
+
+---
+
+### 4. Scheduling
+**Description:** Offer customizable, automated scheduling for client meetings.
+
+**Features:**
+- Client-bookable calendar with synchronization to external calendars (Google, Outlook).
+- Automated email confirmations and reminders.
+- Customizable scheduling links (set durations, availability windows, and buffer times).
+- Incorporate shadcn UI components for calendar views, date pickers, and time-slot selection.
+
+---
+
+### 5. Online Payments
+**Description:** Securely manage digital payments directly within the platform.
+
+**Features:**
+- Accept payments via credit/debit cards and ACH bank transfers.
+- Configure customizable payment plans and manage recurring payments.
+- Automated notifications for payment reminders and overdue alerts.
+- Integrate shadcn UI components for secure checkout forms, payment summaries, and confirmation dialogs.
+
+---
+
+### 6. Client Portal
+**Description:** Provide clients with a secure, centralized hub to access and manage project interactions.
+
+**Features:**
+- Secure client login with customizable branding.
+- Client access to invoices, contracts, proposals, scheduling details, and project documents.
+- Integrated messaging system or threaded comments for effective client communication.
+- Document upload and download capabilities.
+- Use shadcn UI components for secure logins, document views, messaging/chat interfaces, file uploads, and download controls.
+
+---
+
+## General Requirements
+- All UI/UX elements should utilize shadcn for consistency, responsiveness, and efficient development.
+- Maintain tech stack agnostic approach for flexibility and scalability in future developments.
+- Ensure security best practices for payment processing, user authentication, and data protection.
+- Prioritize intuitive user flows and minimal friction for client interactions.
+
+---
+
+## Success Metrics for MVP
+- User-friendly interface and seamless client onboarding.
+- Reduction in client management overhead (manual tasks).
+- Positive user feedback on ease-of-use and clarity.
+- Reliable performance metrics for payment processing and scheduling integrations.
+
