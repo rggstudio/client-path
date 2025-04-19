@@ -181,7 +181,7 @@ export default function ClientsPage() {
                           <Button 
                             variant="outline" 
                             size="sm"
-                            onClick={() => setLocation(`/clients/${client.id}`)}
+                            onClick={() => setLocation(`/clients/${client.id}?edit=true`)}
                           >
                             <i className="ri-edit-line mr-1"></i> Edit
                           </Button>

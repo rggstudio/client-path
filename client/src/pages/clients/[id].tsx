@@ -75,11 +75,14 @@ type ClientFormValues = z.infer<typeof clientFormSchema>;
 export default function ClientDetailsPage() {
   const params = useParams();
   const clientId = params.id;
-  const [, setLocation] = useLocation();
+  const [location, setLocation] = useLocation();
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const [isEditing, setIsEditing] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Check if we should be in edit mode based on URL query param
+  const shouldEdit = new URLSearchParams(location.split('?')[1]).get('edit') === 'true';
+  const [isEditing, setIsEditing] = useState(shouldEdit);
 
   // Fetch client details
   const { 
