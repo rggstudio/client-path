@@ -137,6 +137,17 @@ export default function AccountSettingsPage() {
                 </CardContent>
               </Card>
               
+              <EmailSignature 
+                user={{
+                  name: user.name,
+                  title: "CEO",
+                  company: user.company,
+                  email: user.email,
+                  phone: user.phone,
+                  website: user.website
+                }}
+              />
+              
               <Card>
                 <CardHeader>
                   <CardTitle className="text-xl">Security</CardTitle>
@@ -174,6 +185,17 @@ export default function AccountSettingsPage() {
           
           <TabsContent value="company" className="mt-0">
             <div className="grid gap-6">
+              <EmailSignature 
+                user={{
+                  name: user.name,
+                  title: "CEO",
+                  company: user.company,
+                  email: user.email,
+                  phone: user.phone,
+                  website: user.website
+                }}
+              />
+              
               <Card>
                 <CardHeader>
                   <CardTitle className="text-xl">Build Up Your Professional Presence</CardTitle>
