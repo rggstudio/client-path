@@ -12,8 +12,8 @@ export function MobileNav() {
 
   const navItems = [
     { path: "/", label: "Dashboard", icon: "ri-dashboard-line" },
+    { path: "/clients", label: "Clients", icon: "ri-user-line" },
     { path: "/invoices", label: "Invoices", icon: "ri-file-list-3-line" },
-    { path: "/proposals", label: "Proposals", icon: "ri-file-paper-2-line" },
     { path: "/scheduling", label: "Schedule", icon: "ri-calendar-line" },
     { path: "/more", label: "More", icon: "ri-menu-line" }
   ];

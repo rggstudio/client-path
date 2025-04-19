@@ -16,6 +16,7 @@ export function Sidebar() {
 
   const navItems = [
     { path: "/", label: "Dashboard", icon: "ri-dashboard-line" },
+    { path: "/clients", label: "Clients", icon: "ri-user-line" },
     { path: "/invoices", label: "Invoices", icon: "ri-file-list-3-line" },
     { path: "/proposals", label: "Proposals", icon: "ri-file-paper-2-line" },
     { path: "/contracts", label: "Contracts", icon: "ri-file-text-line" },
