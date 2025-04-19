@@ -42,6 +42,9 @@ function Router() {
       <Route path="/scheduling/create" component={CreateSchedulePage} />
       <Route path="/client-portal" component={ClientPortalPage} />
       <Route path="/payments" component={PaymentsPage} />
+      <Route path="/clients" component={ClientsPage} />
+      <Route path="/clients/create" component={CreateClientPage} />
+      <Route path="/settings/payment-reminders" component={PaymentRemindersPage} />
       <Route component={NotFound} />
     </Switch>
   );

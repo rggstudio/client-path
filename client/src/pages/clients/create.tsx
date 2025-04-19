@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 
@@ -39,7 +39,7 @@ export default function CreateClientPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const [navigate, setLocation] = useNavigate();
+  const [, setLocation] = useLocation();
 
   // Default form values
   const defaultValues: Partial<ClientFormValues> = {
@@ -74,7 +74,7 @@ export default function CreateClientPage() {
         title: "Client created",
         description: "Client has been created successfully.",
       });
-      navigate("/clients");
+      setLocation("/clients");
     },
     onError: (error) => {
       toast({
@@ -102,7 +102,7 @@ export default function CreateClientPage() {
             component: (
               <Button 
                 variant="outline"
-                onClick={() => navigate("/clients")}
+                onClick={() => setLocation("/clients")}
               >
                 <i className="ri-arrow-left-line mr-2"></i>
                 Back to Clients
@@ -249,7 +249,7 @@ export default function CreateClientPage() {
                 <Button
                   type="button"
                   variant="outline"
-                  onClick={() => navigate("/clients")}
+                  onClick={() => setLocation("/clients")}
                 >
                   Cancel
                 </Button>

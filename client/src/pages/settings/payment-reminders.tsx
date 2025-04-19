@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
-import { useNavigate } from "wouter";
+import { useLocation } from "wouter";
 
 import { PageHeader } from "@/components/layout/page-header";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -35,7 +35,7 @@ type ReminderFormValues = z.infer<typeof reminderFormSchema>;
 export default function PaymentRemindersPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-  const [navigate, setLocation] = useNavigate();
+  const [, setLocation] = useLocation();
 
   // Default form values
   const defaultValues: ReminderFormValues = {
