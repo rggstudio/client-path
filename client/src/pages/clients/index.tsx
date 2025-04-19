@@ -181,6 +181,13 @@ export default function ClientsPage() {
                           <Button 
                             variant="outline" 
                             size="sm"
+                            onClick={() => setLocation(`/clients/${client.id}`)}
+                          >
+                            <i className="ri-edit-line mr-1"></i> Edit
+                          </Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm"
                             onClick={() => setLocation(`/invoices/create?client=${client.id}`)}
                           >
                             <i className="ri-bill-line mr-1"></i> Invoice

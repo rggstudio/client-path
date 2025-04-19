@@ -51,7 +51,11 @@ interface Client {
   name: string;
 }
 
-export function InvoiceForm() {
+interface InvoiceFormProps {
+  defaultClientId?: string | null;
+}
+
+export function InvoiceForm({ defaultClientId }: InvoiceFormProps) {
   const [_, navigate] = useLocation();
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -78,6 +82,13 @@ export function InvoiceForm() {
   const items = form.watch("items");
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
+
+  // Set default client when the component loads
+  useEffect(() => {
+    if (defaultClientId && clients?.length) {
+      form.setValue("clientId", defaultClientId);
+    }
+  }, [defaultClientId, clients, form]);
 
   useEffect(() => {
     const calculatedSubtotal = items.reduce((acc, item) => {
