@@ -30,6 +30,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Default user ID for demo purposes
   const DEFAULT_USER_ID = 1;
 
+  // Ensure default user exists
+  try {
+    await storage.ensureDefaultUser();
+    console.log("Default user ready");
+  } catch (error) {
+    console.error("Failed to create default user:", error);
+  }
+
   // Set up authentication
   setupAuth(app);
   

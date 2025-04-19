@@ -30,6 +30,28 @@ export class DatabaseStorage implements IStorage {
       createTableIfMissing: true 
     });
   }
+  
+  async ensureDefaultUser(): Promise<User> {
+    // Check if default user exists
+    const existingUser = await this.getUser(1);
+    if (existingUser) {
+      return existingUser;
+    }
+    
+    // Create default user if not found
+    const demoUser: InsertUser = {
+      username: "demo",
+      password: "$2b$10$zGUy4h3NRPfSYoVdvWxo4.HZVUJQVI8mcQvr2akJNXnAcN3yOlbAO", // Hashed "password"
+      email: "demo@example.com",
+      fullName: "Demo User",
+      companyName: "ClientPath Demo",
+      phone: "555-123-4567"
+    };
+    
+    const newUser = await this.createUser(demoUser);
+    console.log("Created default user:", newUser.id);
+    return newUser;
+  }
 
   // User methods
   async getUser(id: number): Promise<User | undefined> {
