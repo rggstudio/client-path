@@ -232,7 +232,11 @@ export default function ClientDetailsPage() {
   }
 
   // Get status badge style
-  const getStatusBadge = (status: string) => {
+  const getStatusBadge = (status: string | undefined | null) => {
+    if (!status) {
+      return <Badge variant="outline">Unknown</Badge>;
+    }
+    
     switch (status.toLowerCase()) {
       case "active":
         return <Badge className="bg-green-100 text-green-800 hover:bg-green-100">Active</Badge>;
@@ -247,6 +251,8 @@ export default function ClientDetailsPage() {
 
   // Format address for display
   const formatAddress = () => {
+    if (!client) return "No address provided";
+    
     const addressParts = [
       client.address,
       client.city,
