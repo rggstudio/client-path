@@ -9,11 +9,16 @@ import {
   meetings, type Meeting, type InsertMeeting,
   activities, type Activity, type InsertActivity
 } from "@shared/schema";
+import session from "express-session";
+import createMemoryStore from "memorystore";
 
 // modify the interface with any CRUD methods
 // you might need
 
 export interface IStorage {
+  // Session store for authentication
+  sessionStore: session.SessionStore;
+  
   // User methods
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
@@ -90,6 +95,8 @@ export class MemStorage implements IStorage {
   private meetings: Map<number, Meeting>;
   private activities: Map<number, Activity>;
   
+  sessionStore: session.SessionStore;
+  
   currentUserId: number;
   currentClientId: number;
   currentInvoiceItemId: number;
@@ -110,6 +117,12 @@ export class MemStorage implements IStorage {
     this.proposals = new Map();
     this.meetings = new Map();
     this.activities = new Map();
+    
+    // Initialize memory store for sessions
+    const MemoryStore = createMemoryStore(session);
+    this.sessionStore = new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    });
     
     this.currentUserId = 1;
     this.currentClientId = 1;
@@ -871,4 +884,6 @@ export class MemStorage implements IStorage {
   }
 }
 
+// Use MemStorage for development, switch to DatabaseStorage for production
+// import { DatabaseStorage } from './database-storage';
 export const storage = new MemStorage();
