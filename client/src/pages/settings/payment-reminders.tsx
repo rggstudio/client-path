@@ -92,7 +92,7 @@ Best regards,
             component: (
               <Button 
                 variant="outline"
-                onClick={() => navigate("/payments")}
+                onClick={() => setLocation("/payments")}
               >
                 <i className="ri-arrow-left-line mr-2"></i>
                 Back to Payments

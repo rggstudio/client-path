@@ -62,10 +62,7 @@ export default function CreateClientPage() {
   // Create client mutation
   const createClientMutation = useMutation({
     mutationFn: async (data: ClientFormValues) => {
-      const response = await apiRequest('/api/clients', {
-        method: 'POST',
-        body: JSON.stringify(data),
-      });
+      const response = await apiRequest('POST', '/api/clients', data);
       return response;
     },
     onSuccess: () => {
