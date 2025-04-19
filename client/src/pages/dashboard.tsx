@@ -33,8 +33,22 @@ export default function Dashboard() {
         title="Dashboard"
         subtitle="Welcome back, John! Here's what's happening."
         actions={[
-          { label: "Export", icon: "ri-download-2-line", variant: "outline", onClick: () => {} },
-          { label: "New Client", icon: "ri-add-line", variant: "primary", onClick: () => {} }
+          { 
+            component: (
+              <a href="/clients/create" className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-primary text-primary-foreground hover:bg-primary/90 h-10 py-2 px-4">
+                <i className="ri-add-line mr-2"></i>
+                New Client
+              </a>
+            )
+          },
+          { 
+            component: (
+              <button onClick={() => window.print()} className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 py-2 px-4">
+                <i className="ri-download-2-line mr-2"></i>
+                Export
+              </button>
+            )
+          }
         ]}
       />
 

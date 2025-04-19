@@ -139,7 +139,9 @@ export function ProposalList() {
                 paginatedProposals.map((proposal) => (
                   <tr key={proposal.id}>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-slate-900">{proposal.title}</div>
+                      <Link href={`/proposals/${proposal.id}`} className="text-sm font-medium text-primary-600 hover:text-primary-900 hover:underline">
+                        {proposal.title}
+                      </Link>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-slate-900">{proposal.clientName}</div>

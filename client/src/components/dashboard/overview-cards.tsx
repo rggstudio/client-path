@@ -87,16 +87,16 @@ export function getDashboardStats() {
       title: "Pending Invoices",
       value: 8,
       icon: "ri-file-list-3-line",
-      iconBg: "bg-yellow-100",
-      iconColor: "text-yellow-600",
+      iconBg: "bg-primary-100",
+      iconColor: "text-primary-600",
       subtitle: "$4,320 outstanding"
     },
     {
       title: "Scheduled Meetings",
       value: 12,
       icon: "ri-calendar-check-line",
-      iconBg: "bg-blue-100",
-      iconColor: "text-blue-600",
+      iconBg: "bg-primary-100",
+      iconColor: "text-primary-600",
       subtitle: "3 upcoming today"
     }
   ];

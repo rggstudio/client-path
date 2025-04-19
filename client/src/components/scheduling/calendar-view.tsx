@@ -100,8 +100,8 @@ export function CalendarView() {
               components={{
                 DayContent: (props) => (
                   <div className="flex flex-col items-center">
-                    <div>{props.day.day}</div>
-                    {dayRenderer(props.day.date)}
+                    <div>{props.date ? props.date.getDate() : ""}</div>
+                    {props.date && dayRenderer(props.date)}
                   </div>
                 ),
               }}

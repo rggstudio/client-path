@@ -43,7 +43,8 @@ function QuickActionCard({ action }: { action: QuickAction }) {
         <p className="text-sm text-slate-500 mb-4">{action.description}</p>
         <Button 
           asChild
-          className={`w-full ${action.buttonColor} hover:${action.buttonHoverColor}`}
+          variant="default"
+          className="w-full"
         >
           <Link href={action.path}>
             {action.buttonText}
