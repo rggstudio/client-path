@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams, useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
@@ -121,7 +121,7 @@ export default function ClientDetailsPage() {
   });
 
   // Reset form when client data changes or editing mode changes
-  useState(() => {
+  useEffect(() => {
     if (client && !isEditing) {
       form.reset({
         name: client.name,
@@ -138,7 +138,7 @@ export default function ClientDetailsPage() {
         status: client.status,
       });
     }
-  });
+  }, [client, isEditing, form]);
 
   // Update client mutation
   const updateClientMutation = useMutation({
