@@ -5,6 +5,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import { LayoutProvider } from "./providers/layout-provider";
+import { ProtectedRoute } from "@/components/protected-route";
+import { AuthProvider } from "@/hooks/use-auth";
 
 // Pages
 import Dashboard from "@/pages/dashboard";
@@ -27,30 +29,37 @@ import PaymentRemindersPage from "@/pages/settings/payment-reminders";
 import TeamPage from "@/pages/team/index";
 import AccountSettingsPage from "@/pages/settings/account/index";
 import ClientDetailsPage from "@/pages/clients/[id]";
+import LandingPage from "@/pages/landing-page";
+import AuthPage from "@/pages/auth-page";
 
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Dashboard} />
-      <Route path="/invoices" component={InvoicesPage} />
-      <Route path="/invoices/create" component={CreateInvoicePage} />
-      <Route path="/invoices/:id" component={InvoiceDetailsPage} />
-      <Route path="/proposals" component={ProposalsPage} />
-      <Route path="/proposals/create" component={CreateProposalPage} />
-      <Route path="/proposals/:id" component={ProposalDetailsPage} />
-      <Route path="/contracts" component={ContractsPage} />
-      <Route path="/contracts/create" component={CreateContractPage} />
-      <Route path="/contracts/:id" component={ContractDetailsPage} />
-      <Route path="/scheduling" component={SchedulingPage} />
-      <Route path="/scheduling/create" component={CreateSchedulePage} />
-      <Route path="/client-portal" component={ClientPortalPage} />
-      <Route path="/payments" component={PaymentsPage} />
-      <Route path="/clients" component={ClientsPage} />
-      <Route path="/clients/create" component={CreateClientPage} />
-      <Route path="/clients/:id" component={ClientDetailsPage} />
-      <Route path="/team" component={TeamPage} />
-      <Route path="/settings/payment-reminders" component={PaymentRemindersPage} />
-      <Route path="/settings/account" component={AccountSettingsPage} />
+      {/* Public Routes */}
+      <Route path="/" component={LandingPage} />
+      <Route path="/auth" component={AuthPage} />
+      
+      {/* Protected Routes */}
+      <ProtectedRoute path="/dashboard" component={Dashboard} />
+      <ProtectedRoute path="/invoices" component={InvoicesPage} />
+      <ProtectedRoute path="/invoices/create" component={CreateInvoicePage} />
+      <ProtectedRoute path="/invoices/:id" component={InvoiceDetailsPage} />
+      <ProtectedRoute path="/proposals" component={ProposalsPage} />
+      <ProtectedRoute path="/proposals/create" component={CreateProposalPage} />
+      <ProtectedRoute path="/proposals/:id" component={ProposalDetailsPage} />
+      <ProtectedRoute path="/contracts" component={ContractsPage} />
+      <ProtectedRoute path="/contracts/create" component={CreateContractPage} />
+      <ProtectedRoute path="/contracts/:id" component={ContractDetailsPage} />
+      <ProtectedRoute path="/scheduling" component={SchedulingPage} />
+      <ProtectedRoute path="/scheduling/create" component={CreateSchedulePage} />
+      <ProtectedRoute path="/client-portal" component={ClientPortalPage} />
+      <ProtectedRoute path="/payments" component={PaymentsPage} />
+      <ProtectedRoute path="/clients" component={ClientsPage} />
+      <ProtectedRoute path="/clients/create" component={CreateClientPage} />
+      <ProtectedRoute path="/clients/:id" component={ClientDetailsPage} />
+      <ProtectedRoute path="/team" component={TeamPage} />
+      <ProtectedRoute path="/settings/payment-reminders" component={PaymentRemindersPage} />
+      <ProtectedRoute path="/settings/account" component={AccountSettingsPage} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -59,12 +68,14 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <LayoutProvider>
-          <Toaster />
-          <Router />
-        </LayoutProvider>
-      </TooltipProvider>
+      <AuthProvider>
+        <TooltipProvider>
+          <LayoutProvider>
+            <Toaster />
+            <Router />
+          </LayoutProvider>
+        </TooltipProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
