@@ -24,6 +24,8 @@ import PaymentsPage from "@/pages/payments/index";
 import ClientsPage from "@/pages/clients/index";
 import CreateClientPage from "@/pages/clients/create";
 import PaymentRemindersPage from "@/pages/settings/payment-reminders";
+import TeamPage from "@/pages/team/index";
+import AccountSettingsPage from "@/pages/settings/account/index";
 
 function Router() {
   return (
@@ -44,7 +46,9 @@ function Router() {
       <Route path="/payments" component={PaymentsPage} />
       <Route path="/clients" component={ClientsPage} />
       <Route path="/clients/create" component={CreateClientPage} />
+      <Route path="/team" component={TeamPage} />
       <Route path="/settings/payment-reminders" component={PaymentRemindersPage} />
+      <Route path="/settings/account" component={AccountSettingsPage} />
       <Route component={NotFound} />
     </Switch>
   );
