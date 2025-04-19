@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export default function Dashboard() {
   // Fetch overview stats
-  const { data: stats } = useQuery({
+  const { data: stats } = useQuery<any[]>({
     queryKey: ['/api/dashboard/stats'],
   });
   
@@ -53,7 +53,7 @@ export default function Dashboard() {
       />
 
       {/* Overview Cards */}
-      <OverviewCards stats={stats || getDashboardStats()} />
+      <OverviewCards stats={stats as any[] || getDashboardStats()} />
 
       {/* Quick Actions */}
       <QuickActions actions={getQuickActions()} />

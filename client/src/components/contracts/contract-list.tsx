@@ -137,7 +137,9 @@ export function ContractList() {
                 paginatedContracts.map((contract) => (
                   <tr key={contract.id}>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-slate-900">{contract.title}</div>
+                      <Link href={`/contracts/${contract.id}`} className="text-sm font-medium text-primary-600 hover:text-primary-900 hover:underline">
+                        {contract.title}
+                      </Link>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-slate-900">{contract.clientName}</div>
@@ -184,11 +186,14 @@ export function ContractList() {
             <Pagination>
               <PaginationContent>
                 <PaginationItem>
-                  <PaginationPrevious 
+                  <button
                     onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                     disabled={currentPage === 1}
-                    className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
-                  />
+                    className={`flex items-center gap-1 ${currentPage === 1 ? "pointer-events-none opacity-50" : ""}`}
+                  >
+                    <i className="ri-arrow-left-s-line"></i>
+                    Previous
+                  </button>
                 </PaginationItem>
                 
                 {Array.from({ length: totalPages }).map((_, index) => (
@@ -203,11 +208,14 @@ export function ContractList() {
                 ))}
                 
                 <PaginationItem>
-                  <PaginationNext 
+                  <button
                     onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                     disabled={currentPage === totalPages}
-                    className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
-                  />
+                    className={`flex items-center gap-1 ${currentPage === totalPages ? "pointer-events-none opacity-50" : ""}`}
+                  >
+                    Next
+                    <i className="ri-arrow-right-s-line"></i>
+                  </button>
                 </PaginationItem>
               </PaginationContent>
             </Pagination>

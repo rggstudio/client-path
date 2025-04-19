@@ -56,7 +56,7 @@ function QuickActionCard({ action }: { action: QuickAction }) {
 }
 
 // Default quick actions
-export function getQuickActions() {
+export const getQuickActions = (): QuickAction[] => {
   return [
     {
       title: "Create Invoice",

@@ -59,7 +59,7 @@ function StatisticsCard({ stat }: { stat: StatCard }) {
 }
 
 // Default dashboard statistics
-export function getDashboardStats() {
+export const getDashboardStats = (): StatCard[] => {
   return [
     {
       title: "Total Clients",

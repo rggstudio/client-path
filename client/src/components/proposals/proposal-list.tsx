@@ -197,11 +197,14 @@ export function ProposalList() {
             <Pagination>
               <PaginationContent>
                 <PaginationItem>
-                  <PaginationPrevious 
+                  <button
                     onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                     disabled={currentPage === 1}
-                    className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
-                  />
+                    className={`flex items-center gap-1 ${currentPage === 1 ? "pointer-events-none opacity-50" : ""}`}
+                  >
+                    <i className="ri-arrow-left-s-line"></i>
+                    Previous
+                  </button>
                 </PaginationItem>
                 
                 {Array.from({ length: totalPages }).map((_, index) => (
@@ -216,11 +219,14 @@ export function ProposalList() {
                 ))}
                 
                 <PaginationItem>
-                  <PaginationNext 
+                  <button
                     onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                     disabled={currentPage === totalPages}
-                    className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
-                  />
+                    className={`flex items-center gap-1 ${currentPage === totalPages ? "pointer-events-none opacity-50" : ""}`}
+                  >
+                    Next
+                    <i className="ri-arrow-right-s-line"></i>
+                  </button>
                 </PaginationItem>
               </PaginationContent>
             </Pagination>
