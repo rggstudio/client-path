@@ -16,7 +16,7 @@ import {
   contracts, proposals, meetings, activities 
 } from '@shared/schema';
 import { eq, desc, and, gte, isNull, sql } from 'drizzle-orm';
-import { PostgresSessionStore } from 'connect-pg-simple';
+import connectPgSimple from 'connect-pg-simple';
 import session from 'express-session';
 import { pool } from './db';
 
@@ -24,6 +24,7 @@ export class DatabaseStorage implements IStorage {
   sessionStore: session.SessionStore;
 
   constructor() {
+    const PostgresSessionStore = connectPgSimple(session);
     this.sessionStore = new PostgresSessionStore({ 
       pool, 
       createTableIfMissing: true 

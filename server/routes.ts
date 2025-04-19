@@ -2,6 +2,7 @@ import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { z } from "zod";
+import { setupAuth } from "./auth";
 import { 
   insertClientSchema,
   insertInvoiceSchema,
@@ -29,6 +30,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Default user ID for demo purposes
   const DEFAULT_USER_ID = 1;
 
+  // Set up authentication
+  setupAuth(app);
+  
   // Set up HTTP server
   const httpServer = createServer(app);
 
