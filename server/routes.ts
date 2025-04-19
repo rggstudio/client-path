@@ -81,6 +81,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     if (!data) return;
     
     try {
+      // The userId field is omitted from the schema and added here
       const client = await storage.createClient({
         ...data,
         userId: DEFAULT_USER_ID
@@ -96,6 +97,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       res.status(201).json(client);
     } catch (error) {
+      console.error("Error creating client:", error);
       res.status(500).json({ message: "Failed to create client" });
     }
   });

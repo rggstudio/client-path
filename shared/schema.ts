@@ -38,6 +38,7 @@ export const clients = pgTable("clients", {
 
 export const insertClientSchema = createInsertSchema(clients).omit({
   id: true,
+  userId: true,
   createdAt: true,
 });
 
@@ -53,6 +54,7 @@ export const invoiceItems = pgTable("invoice_items", {
 
 export const insertInvoiceItemSchema = createInsertSchema(invoiceItems).omit({
   id: true,
+  userId: true,
   createdAt: true,
 });
 
@@ -77,6 +79,7 @@ export const invoices = pgTable("invoices", {
 
 export const insertInvoiceSchema = createInsertSchema(invoices).omit({
   id: true,
+  userId: true,
   createdAt: true,
 });
 
@@ -112,6 +115,7 @@ export const contracts = pgTable("contracts", {
 
 export const insertContractSchema = createInsertSchema(contracts).omit({
   id: true,
+  userId: true,
   createdAt: true,
 });
 
@@ -134,6 +138,7 @@ export const proposals = pgTable("proposals", {
 
 export const insertProposalSchema = createInsertSchema(proposals).omit({
   id: true,
+  userId: true,
   createdAt: true,
 });
 
@@ -155,6 +160,7 @@ export const meetings = pgTable("meetings", {
 
 export const insertMeetingSchema = createInsertSchema(meetings).omit({
   id: true,
+  userId: true,
   createdAt: true,
 });
 
@@ -171,6 +177,7 @@ export const activities = pgTable("activities", {
 
 export const insertActivitySchema = createInsertSchema(activities).omit({
   id: true,
+  userId: true,
   createdAt: true,
 });
 
