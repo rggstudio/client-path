@@ -36,7 +36,7 @@ function QuickActionCard({ action }: { action: QuickAction }) {
       <CardHeader className="p-5 border-b border-slate-100">
         <div className="flex items-center justify-between">
           <h3 className="font-semibold text-slate-900">{action.title}</h3>
-          <i className={`${action.icon} ${action.iconColor}`}></i>
+          <i className={`${action.icon} text-lg text-black`}></i>
         </div>
       </CardHeader>
       <CardContent className="p-5">
@@ -61,8 +61,8 @@ export const getQuickActions = (): QuickAction[] => {
     {
       title: "Create Invoice",
       description: "Create and send professional invoices to your clients.",
-      icon: "ri-file-list-3-line",
-      iconColor: "text-primary-600",
+      icon: "ri-file-list-line",
+      iconColor: "text-black",
       buttonText: "Create Invoice",
       buttonColor: "bg-primary-600 text-white",
       buttonHoverColor: "bg-primary-700",
@@ -71,8 +71,8 @@ export const getQuickActions = (): QuickAction[] => {
     {
       title: "Send Proposal",
       description: "Create and send professional proposals to potential clients.",
-      icon: "ri-file-paper-2-line",
-      iconColor: "text-secondary-600",
+      icon: "ri-file-paper-line",
+      iconColor: "text-black",
       buttonText: "Create Proposal",
       buttonColor: "bg-secondary-600 text-white",
       buttonHoverColor: "bg-secondary-700",
@@ -81,8 +81,8 @@ export const getQuickActions = (): QuickAction[] => {
     {
       title: "Schedule Meeting",
       description: "Create booking links for clients to schedule meetings with you.",
-      icon: "ri-calendar-line",
-      iconColor: "text-blue-600",
+      icon: "ri-calendar-2-line",
+      iconColor: "text-black",
       buttonText: "Schedule Meeting",
       buttonColor: "bg-blue-600 text-white",
       buttonHoverColor: "bg-blue-700",

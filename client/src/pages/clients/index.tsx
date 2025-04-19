@@ -77,13 +77,15 @@ export default function ClientsPage() {
               </CardDescription>
             </div>
             <div className="w-full max-w-sm">
-              <Input
-                placeholder="Search clients..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full"
-                icon={<i className="ri-search-line text-muted-foreground"></i>}
-              />
+              <div className="relative">
+                <Input
+                  placeholder="Search clients..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-9"
+                />
+                <i className="ri-search-line text-muted-foreground absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+              </div>
             </div>
           </div>
         </CardHeader>

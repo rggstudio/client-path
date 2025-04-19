@@ -37,7 +37,7 @@ function StatisticsCard({ stat }: { stat: StatCard }) {
           <p className="text-2xl font-bold text-slate-900 mt-1">{stat.value}</p>
         </div>
         <div className={`h-12 w-12 ${stat.iconBg} rounded-full flex items-center justify-center`}>
-          <i className={`${stat.icon} text-xl ${stat.iconColor}`}></i>
+          <i className={`${stat.icon} text-lg ${stat.iconColor}`}></i>
         </div>
       </div>
       
@@ -65,8 +65,8 @@ export const getDashboardStats = (): StatCard[] => {
       title: "Total Clients",
       value: 24,
       icon: "ri-user-line",
-      iconBg: "bg-primary-100",
-      iconColor: "text-primary-600",
+      iconBg: "bg-white",
+      iconColor: "text-black",
       change: {
         value: "12% increase",
         isPositive: true
@@ -75,9 +75,9 @@ export const getDashboardStats = (): StatCard[] => {
     {
       title: "Total Revenue",
       value: formatCurrency(12450),
-      icon: "ri-money-dollar-circle-line",
-      iconBg: "bg-primary-100",
-      iconColor: "text-primary-600",
+      icon: "ri-money-dollar-circle-fill",
+      iconBg: "bg-white",
+      iconColor: "text-black",
       change: {
         value: "8% increase",
         isPositive: true
@@ -86,17 +86,17 @@ export const getDashboardStats = (): StatCard[] => {
     {
       title: "Pending Invoices",
       value: 8,
-      icon: "ri-file-list-3-line",
-      iconBg: "bg-primary-100",
-      iconColor: "text-primary-600",
+      icon: "ri-file-list-line",
+      iconBg: "bg-yellow-100",
+      iconColor: "text-black",
       subtitle: "$4,320 outstanding"
     },
     {
       title: "Scheduled Meetings",
       value: 12,
-      icon: "ri-calendar-check-line",
-      iconBg: "bg-primary-100",
-      iconColor: "text-primary-600",
+      icon: "ri-calendar-2-line",
+      iconBg: "bg-blue-100",
+      iconColor: "text-black",
       subtitle: "3 upcoming today"
     }
   ];
