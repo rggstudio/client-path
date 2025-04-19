@@ -33,6 +33,7 @@ export const clients = pgTable("clients", {
   zipCode: text("zip_code"),
   country: text("country"),
   notes: text("notes"),
+  status: text("status").default("active").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
