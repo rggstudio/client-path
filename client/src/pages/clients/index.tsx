@@ -14,9 +14,14 @@ interface Client {
   name: string;
   email: string;
   phone: string | null;
-  company: string | null;
-  website: string | null;
-  status: string;
+  companyName: string | null;
+  address: string | null;
+  city: string | null;
+  state: string | null;
+  zipCode: string | null;
+  country: string | null;
+  notes: string | null;
+  status?: string;
 }
 
 export default function ClientsPage() {
@@ -30,14 +35,25 @@ export default function ClientsPage() {
 
   // Filter clients based on search query
   const filteredClients = clients.filter(client => {
-    const searchTerms = searchQuery.toLowerCase().split(" ");
-    const clientData = `${client.name} ${client.email} ${client.company || ""}`.toLowerCase();
+    if (!searchQuery) return true;
     
-    return searchTerms.every(term => clientData.includes(term));
+    try {
+      const searchTerms = searchQuery.toLowerCase().split(" ");
+      const clientData = `${client.name || ""} ${client.email || ""} ${client.companyName || ""}`.toLowerCase();
+      
+      return searchTerms.every(term => clientData.includes(term));
+    } catch (error) {
+      console.error("Error filtering client:", error, client);
+      return false;
+    }
   });
 
   // Status badge style mapping
-  const getStatusBadge = (status: string) => {
+  const getStatusBadge = (status?: string) => {
+    if (!status) {
+      return <Badge variant="outline">Unknown</Badge>;
+    }
+    
     switch (status.toLowerCase()) {
       case "active":
         return <Badge className="bg-green-100 text-green-800 hover:bg-green-100">Active</Badge>;
@@ -145,7 +161,7 @@ export default function ClientsPage() {
                       </TableCell>
                       <TableCell>{client.email}</TableCell>
                       <TableCell className="hidden md:table-cell">
-                        {client.company || "—"}
+                        {client.companyName || "—"}
                       </TableCell>
                       <TableCell className="hidden md:table-cell">
                         {client.phone || "—"}
