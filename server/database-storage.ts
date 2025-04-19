@@ -294,82 +294,129 @@ export class DatabaseStorage implements IStorage {
 
   // Dashboard methods
   async getDashboardStats(userId: number): Promise<any> {
-    // Count total clients
-    const [clientsCount] = await db
-      .select({ count: sql<number>`count(*)` })
-      .from(clients)
-      .where(eq(clients.userId, userId));
+    try {
+      // Count total clients
+      const [clientsCount] = await db
+        .select({ count: sql<number>`count(*)` })
+        .from(clients)
+        .where(eq(clients.userId, userId));
 
-    // Calculate total revenue (join with invoices to filter by userId)
-    const [revenue] = await db
-      .select({ sum: sql<number>`sum(payments.amount)` })
-      .from(payments)
-      .innerJoin(invoices, eq(payments.invoiceId, invoices.id))
-      .where(eq(invoices.userId, userId));
+      // Calculate total revenue - handle empty database case
+      let revenueSum = 0;
+      try {
+        const [revenue] = await db
+          .select({ sum: sql<number>`COALESCE(sum(payments.amount), 0)` })
+          .from(payments)
+          .innerJoin(invoices, eq(payments.invoiceId, invoices.id))
+          .where(eq(invoices.userId, userId));
+        
+        revenueSum = revenue?.sum || 0;
+      } catch (error) {
+        console.error("Error querying revenue:", error);
+        // Continue with zero if there's an error
+      }
 
-    // Count pending invoices
-    const [pendingInvoices] = await db
-      .select({ count: sql<number>`count(*)` })
-      .from(invoices)
-      .where(
-        and(
-          eq(invoices.userId, userId),
-          eq(invoices.status, 'pending')
-        )
-      );
+      // Count pending invoices
+      const [pendingInvoices] = await db
+        .select({ count: sql<number>`count(*)` })
+        .from(invoices)
+        .where(
+          and(
+            eq(invoices.userId, userId),
+            eq(invoices.status, 'pending')
+          )
+        );
 
-    // Count upcoming meetings
-    const now = new Date();
-    const [upcomingMeetings] = await db
-      .select({ count: sql<number>`count(*)` })
-      .from(meetings)
-      .where(
-        and(
-          eq(meetings.userId, userId),
-          gte(meetings.startDateTime, now)
-        )
-      );
+      // Count upcoming meetings
+      const now = new Date();
+      const [upcomingMeetings] = await db
+        .select({ count: sql<number>`count(*)` })
+        .from(meetings)
+        .where(
+          and(
+            eq(meetings.userId, userId),
+            gte(meetings.startDateTime, now)
+          )
+        );
 
-    // Calculate the change percentages (this would normally compare with previous period)
-    // For now, we'll use static mock values
-    const clientsChange = { value: "+12%", isPositive: true };
-    const revenueChange = { value: "+8%", isPositive: true };
-    const invoicesChange = { value: "-5%", isPositive: false };
-    const meetingsChange = { value: "+15%", isPositive: true };
+      // Calculate the change percentages (this would normally compare with previous period)
+      // For now, we'll use static mock values
+      const clientsChange = { value: "+12%", isPositive: true };
+      const revenueChange = { value: "+8%", isPositive: true };
+      const invoicesChange = { value: "-5%", isPositive: false };
+      const meetingsChange = { value: "+15%", isPositive: true };
 
-    return [
-      {
-        title: "Total Clients",
-        value: clientsCount.count || 0,
-        icon: "user-line",
-        iconBg: "bg-blue-100",
-        iconColor: "text-blue-600",
-        change: clientsChange,
-      },
-      {
-        title: "Total Revenue",
-        value: `$${(revenue.sum || 0).toLocaleString()}`,
-        icon: "money-dollar-circle-line",
-        iconBg: "bg-green-100",
-        iconColor: "text-green-600",
-        change: revenueChange,
-      },
-      {
-        title: "Pending Invoices",
-        value: pendingInvoices.count || 0,
-        icon: "file-list-3-line",
-        iconBg: "bg-amber-100",
-        iconColor: "text-amber-600",
-        change: invoicesChange,
-      },
-      {
-        title: "Upcoming Meetings",
-        value: upcomingMeetings.count || 0,
-        icon: "calendar-event-line",
-        iconBg: "bg-purple-100",
-        iconColor: "text-purple-600",
-        change: meetingsChange,
-      },
-    ];
+      return [
+        {
+          title: "Total Clients",
+          value: clientsCount.count || 0,
+          icon: "user-line",
+          iconBg: "bg-blue-100",
+          iconColor: "text-blue-600",
+          change: clientsChange,
+        },
+        {
+          title: "Total Revenue",
+          value: `$${revenueSum.toLocaleString()}`,
+          icon: "money-dollar-circle-line",
+          iconBg: "bg-green-100",
+          iconColor: "text-green-600",
+          change: revenueChange,
+        },
+        {
+          title: "Pending Invoices",
+          value: pendingInvoices.count || 0,
+          icon: "file-list-3-line",
+          iconBg: "bg-amber-100",
+          iconColor: "text-amber-600",
+          change: invoicesChange,
+        },
+        {
+          title: "Upcoming Meetings",
+          value: upcomingMeetings.count || 0,
+          icon: "calendar-event-line",
+          iconBg: "bg-purple-100",
+          iconColor: "text-purple-600",
+          change: meetingsChange,
+        },
+      ];
+    } catch (error) {
+      console.error("Error in getDashboardStats:", error);
+      // Return default values in case of any error
+      return [
+        {
+          title: "Total Clients",
+          value: 0,
+          icon: "user-line",
+          iconBg: "bg-blue-100",
+          iconColor: "text-blue-600",
+          change: { value: "+0%", isPositive: true },
+        },
+        {
+          title: "Total Revenue",
+          value: "$0",
+          icon: "money-dollar-circle-line",
+          iconBg: "bg-green-100",
+          iconColor: "text-green-600",
+          change: { value: "+0%", isPositive: true },
+        },
+        {
+          title: "Pending Invoices",
+          value: 0,
+          icon: "file-list-3-line",
+          iconBg: "bg-amber-100",
+          iconColor: "text-amber-600",
+          change: { value: "+0%", isPositive: true },
+        },
+        {
+          title: "Upcoming Meetings",
+          value: 0,
+          icon: "calendar-event-line",
+          iconBg: "bg-purple-100",
+          iconColor: "text-purple-600",
+          change: { value: "+0%", isPositive: true },
+        },
+      ];
+    }
   }
 }

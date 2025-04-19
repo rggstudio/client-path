@@ -727,18 +727,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const payments = await storage.getPayments(DEFAULT_USER_ID);
       
+      if (!payments || payments.length === 0) {
+        return res.json([]);
+      }
+      
       // Enrich payments with invoice and client info
       const enrichedPayments = await Promise.all(payments.map(async (payment) => {
-        const invoice = await storage.getInvoice(payment.invoiceId);
         let clientName = "Unknown Client";
         let invoiceNumber = "Unknown Invoice";
         
-        if (invoice) {
-          invoiceNumber = invoice.invoiceNumber;
-          const client = await storage.getClient(invoice.clientId);
-          if (client) {
-            clientName = client.name;
+        try {
+          const invoice = await storage.getInvoice(payment.invoiceId);
+          if (invoice) {
+            invoiceNumber = invoice.invoiceNumber;
+            const client = await storage.getClient(invoice.clientId);
+            if (client) {
+              clientName = client.name;
+            }
           }
+        } catch (err) {
+          console.error("Error enriching payment:", err);
         }
         
         return {
@@ -754,6 +762,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       res.json(enrichedPayments);
     } catch (error) {
+      console.error("Failed to fetch payments:", error);
       res.status(500).json({ message: "Failed to fetch payments" });
     }
   });
