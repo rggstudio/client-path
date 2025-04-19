@@ -833,8 +833,8 @@ export class MemStorage implements IStorage {
         title: "Total Clients",
         value: clientCount,
         icon: "ri-user-line",
-        iconBg: "bg-primary-100",
-        iconColor: "text-primary-600",
+        iconBg: "",
+        iconColor: "text-black",
         change: {
           value: "12% increase",
           isPositive: true
@@ -844,8 +844,8 @@ export class MemStorage implements IStorage {
         title: "Total Revenue",
         value: totalRevenue,
         icon: "ri-money-dollar-circle-line",
-        iconBg: "bg-secondary-100",
-        iconColor: "text-secondary-600",
+        iconBg: "",
+        iconColor: "text-black",
         change: {
           value: "8% increase",
           isPositive: true
@@ -854,17 +854,17 @@ export class MemStorage implements IStorage {
       {
         title: "Pending Invoices",
         value: pendingInvoiceCount,
-        icon: "ri-file-list-3-line",
-        iconBg: "bg-yellow-100",
-        iconColor: "text-yellow-600",
+        icon: "ri-file-list-line",
+        iconBg: "",
+        iconColor: "text-black",
         subtitle: `$${outstandingAmount} outstanding`
       },
       {
         title: "Scheduled Meetings",
         value: meetingCount,
-        icon: "ri-calendar-check-line",
-        iconBg: "bg-blue-100",
-        iconColor: "text-blue-600",
+        icon: "ri-calendar-2-line",
+        iconBg: "",
+        iconColor: "text-black",
         subtitle: `${todayMeetings} upcoming today`
       }
     ];
