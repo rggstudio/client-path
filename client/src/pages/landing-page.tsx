@@ -257,7 +257,7 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <Tabs defaultValue="monthly" className="max-w-3xl mx-auto">
+          <Tabs defaultValue="monthly" className="max-w-4xl mx-auto">
             <div className="flex justify-center mb-8">
               <TabsList>
                 <TabsTrigger value="monthly">Monthly</TabsTrigger>
@@ -265,9 +265,9 @@ export default function LandingPage() {
               </TabsList>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <TabsContent value="monthly" className="mt-0">
-                <Card className="border-0 shadow-md">
+            <TabsContent value="monthly" className="mt-0">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <Card className="border-0 shadow-md h-full">
                   <CardContent className="pt-6">
                     <div className="mb-4">
                       <h3 className="text-lg font-medium">Lite</h3>
@@ -291,17 +291,19 @@ export default function LandingPage() {
                       ))}
                     </ul>
 
-                    <Button 
-                      variant="outline" 
-                      className="w-full"
-                      onClick={() => setLocation("/auth?register=true&plan=lite")}
-                    >
-                      Get started free
-                    </Button>
+                    <div className="mt-auto pt-4">
+                      <Button 
+                        variant="outline" 
+                        className="w-full"
+                        onClick={() => setLocation("/auth?register=true&plan=lite")}
+                      >
+                        Get started free
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
 
-                <Card className="border-0 shadow-md relative overflow-hidden">
+                <Card className="border-0 shadow-md relative overflow-hidden h-full">
                   <div className="absolute top-0 right-0 bg-primary text-primary-foreground px-3 py-1 text-xs font-medium">
                     Most Popular
                   </div>
@@ -331,19 +333,23 @@ export default function LandingPage() {
                       ))}
                     </ul>
 
-                    <Button 
-                      className="w-full"
-                      onClick={() => setLocation("/auth?register=true&plan=pro")}
-                    >
-                      Start 7-day free trial
-                    </Button>
-                    <p className="text-xs text-center mt-2 text-muted-foreground">No credit card required</p>
+                    <div className="mt-auto pt-4">
+                      <Button 
+                        className="w-full"
+                        onClick={() => setLocation("/auth?register=true&plan=pro")}
+                      >
+                        Start 7-day free trial
+                      </Button>
+                      <p className="text-xs text-center mt-2 text-muted-foreground">No credit card required</p>
+                    </div>
                   </CardContent>
                 </Card>
-              </TabsContent>
+              </div>
+            </TabsContent>
 
-              <TabsContent value="annually" className="mt-0">
-                <Card className="border-0 shadow-md">
+            <TabsContent value="annually" className="mt-0">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <Card className="border-0 shadow-md h-full">
                   <CardContent className="pt-6">
                     <div className="mb-4">
                       <h3 className="text-lg font-medium">Lite</h3>
@@ -367,17 +373,19 @@ export default function LandingPage() {
                       ))}
                     </ul>
 
-                    <Button 
-                      variant="outline" 
-                      className="w-full"
-                      onClick={() => setLocation("/auth?register=true&plan=lite")}
-                    >
-                      Get started free
-                    </Button>
+                    <div className="mt-auto pt-4">
+                      <Button 
+                        variant="outline" 
+                        className="w-full"
+                        onClick={() => setLocation("/auth?register=true&plan=lite")}
+                      >
+                        Get started free
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
 
-                <Card className="border-0 shadow-md relative overflow-hidden">
+                <Card className="border-0 shadow-md relative overflow-hidden h-full">
                   <div className="absolute top-0 right-0 bg-primary text-primary-foreground px-3 py-1 text-xs font-medium">
                     Most Popular
                   </div>
@@ -412,17 +420,19 @@ export default function LandingPage() {
                       ))}
                     </ul>
 
-                    <Button 
-                      className="w-full"
-                      onClick={() => setLocation("/auth?register=true&plan=pro-annual")}
-                    >
-                      Start 7-day free trial
-                    </Button>
-                    <p className="text-xs text-center mt-2 text-muted-foreground">No credit card required</p>
+                    <div className="mt-auto pt-4">
+                      <Button 
+                        className="w-full"
+                        onClick={() => setLocation("/auth?register=true&plan=pro-annual")}
+                      >
+                        Start 7-day free trial
+                      </Button>
+                      <p className="text-xs text-center mt-2 text-muted-foreground">No credit card required</p>
+                    </div>
                   </CardContent>
                 </Card>
-              </TabsContent>
-            </div>
+              </div>
+            </TabsContent>
           </Tabs>
 
           <div className="max-w-3xl mx-auto mt-12">
