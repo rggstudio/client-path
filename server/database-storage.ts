@@ -141,7 +141,14 @@ export class DatabaseStorage implements IStorage {
 
   // Payment methods
   async getPayments(userId: number): Promise<Payment[]> {
-    return await db.select().from(payments).where(eq(payments.userId, userId));
+    return await db
+      .select({ 
+        payment: payments 
+      })
+      .from(payments)
+      .innerJoin(invoices, eq(payments.invoiceId, invoices.id))
+      .where(eq(invoices.userId, userId))
+      .then(rows => rows.map(row => row.payment));
   }
 
   async getPaymentsByInvoice(invoiceId: number): Promise<Payment[]> {
@@ -182,8 +189,8 @@ export class DatabaseStorage implements IStorage {
   }
 
   async deleteContract(id: number): Promise<boolean> {
-    const result = await db.delete(contracts).where(eq(contracts.id, id));
-    return result.count > 0;
+    await db.delete(contracts).where(eq(contracts.id, id));
+    return true;
   }
 
   async getAvailableContracts(userId: number): Promise<Contract[]> {
@@ -221,8 +228,8 @@ export class DatabaseStorage implements IStorage {
   }
 
   async deleteProposal(id: number): Promise<boolean> {
-    const result = await db.delete(proposals).where(eq(proposals.id, id));
-    return result.count > 0;
+    await db.delete(proposals).where(eq(proposals.id, id));
+    return true;
   }
 
   // Meeting methods
@@ -249,8 +256,8 @@ export class DatabaseStorage implements IStorage {
   }
 
   async deleteMeeting(id: number): Promise<boolean> {
-    const result = await db.delete(meetings).where(eq(meetings.id, id));
-    return result.count > 0;
+    await db.delete(meetings).where(eq(meetings.id, id));
+    return true;
   }
 
   async getUpcomingMeetings(userId: number, limit: number = 3): Promise<Meeting[]> {
@@ -293,11 +300,12 @@ export class DatabaseStorage implements IStorage {
       .from(clients)
       .where(eq(clients.userId, userId));
 
-    // Calculate total revenue
+    // Calculate total revenue (join with invoices to filter by userId)
     const [revenue] = await db
-      .select({ sum: sql<number>`sum(amount)` })
+      .select({ sum: sql<number>`sum(payments.amount)` })
       .from(payments)
-      .where(eq(payments.userId, userId));
+      .innerJoin(invoices, eq(payments.invoiceId, invoices.id))
+      .where(eq(invoices.userId, userId));
 
     // Count pending invoices
     const [pendingInvoices] = await db
