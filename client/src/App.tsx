@@ -21,6 +21,9 @@ import SchedulingPage from "@/pages/scheduling/index";
 import CreateSchedulePage from "@/pages/scheduling/create";
 import ClientPortalPage from "@/pages/client-portal/index";
 import PaymentsPage from "@/pages/payments/index";
+import ClientsPage from "@/pages/clients/index";
+import CreateClientPage from "@/pages/clients/create";
+import PaymentRemindersPage from "@/pages/settings/payment-reminders";
 
 function Router() {
   return (

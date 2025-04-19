@@ -76,8 +76,8 @@ export const getDashboardStats = (): StatCard[] => {
       title: "Total Revenue",
       value: formatCurrency(12450),
       icon: "ri-money-dollar-circle-line",
-      iconBg: "bg-secondary-100",
-      iconColor: "text-secondary-600",
+      iconBg: "bg-primary-100",
+      iconColor: "text-primary-600",
       change: {
         value: "8% increase",
         isPositive: true
