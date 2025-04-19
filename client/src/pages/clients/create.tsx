@@ -23,13 +23,17 @@ const clientFormSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
-  phone: z.string().optional(),
-  company: z.string().optional(),
+  phone: z.string().optional().nullable(),
+  companyName: z.string().optional().nullable(),
   website: z.string().url({
     message: "Please enter a valid URL.",
-  }).optional().or(z.literal('')),
-  address: z.string().optional(),
-  notes: z.string().optional(),
+  }).optional().nullable().or(z.literal('')),
+  address: z.string().optional().nullable(),
+  city: z.string().optional().nullable(),
+  state: z.string().optional().nullable(),
+  zipCode: z.string().optional().nullable(),
+  country: z.string().optional().nullable(),
+  notes: z.string().optional().nullable(),
   status: z.string(),
 });
 
@@ -46,9 +50,13 @@ export default function CreateClientPage() {
     name: "",
     email: "",
     phone: "",
-    company: "",
+    companyName: "",
     website: "",
     address: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    country: "",
     notes: "",
     status: "active",
   };
@@ -155,7 +163,7 @@ export default function CreateClientPage() {
                     <FormItem>
                       <FormLabel>Phone</FormLabel>
                       <FormControl>
-                        <Input placeholder="+1 (555) 123-4567" {...field} />
+                        <Input placeholder="+1 (555) 123-4567" {...field} value={field.value || ""} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -164,12 +172,12 @@ export default function CreateClientPage() {
 
                 <FormField
                   control={form.control}
-                  name="company"
+                  name="companyName"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Company</FormLabel>
                       <FormControl>
-                        <Input placeholder="Company Name" {...field} />
+                        <Input placeholder="Company Name" {...field} value={field.value || ""} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
