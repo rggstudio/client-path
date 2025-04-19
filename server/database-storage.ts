@@ -21,7 +21,7 @@ import session from 'express-session';
 import { pool } from './db';
 
 export class DatabaseStorage implements IStorage {
-  sessionStore: session.SessionStore;
+  sessionStore: session.Store;
 
   constructor() {
     const PostgresSessionStore = connectPgSimple(session);
@@ -71,8 +71,8 @@ export class DatabaseStorage implements IStorage {
   }
 
   async deleteClient(id: number): Promise<boolean> {
-    const result = await db.delete(clients).where(eq(clients.id, id));
-    return result.count > 0;
+    await db.delete(clients).where(eq(clients.id, id));
+    return true;
   }
 
   // Invoice Item methods
@@ -99,8 +99,8 @@ export class DatabaseStorage implements IStorage {
   }
 
   async deleteInvoiceItem(id: number): Promise<boolean> {
-    const result = await db.delete(invoiceItems).where(eq(invoiceItems.id, id));
-    return result.count > 0;
+    await db.delete(invoiceItems).where(eq(invoiceItems.id, id));
+    return true;
   }
 
   // Invoice methods
@@ -127,8 +127,8 @@ export class DatabaseStorage implements IStorage {
   }
 
   async deleteInvoice(id: number): Promise<boolean> {
-    const result = await db.delete(invoices).where(eq(invoices.id, id));
-    return result.count > 0;
+    await db.delete(invoices).where(eq(invoices.id, id));
+    return true;
   }
 
   async getLatestInvoices(userId: number, limit: number = 3): Promise<Invoice[]> {

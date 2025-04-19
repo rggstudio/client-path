@@ -17,7 +17,7 @@ import createMemoryStore from "memorystore";
 
 export interface IStorage {
   // Session store for authentication
-  sessionStore: session.SessionStore;
+  sessionStore: session.Store;
   
   // User methods
   getUser(id: number): Promise<User | undefined>;
@@ -95,7 +95,7 @@ export class MemStorage implements IStorage {
   private meetings: Map<number, Meeting>;
   private activities: Map<number, Activity>;
   
-  sessionStore: session.SessionStore;
+  sessionStore: session.Store;
   
   currentUserId: number;
   currentClientId: number;
@@ -884,6 +884,6 @@ export class MemStorage implements IStorage {
   }
 }
 
-// Use MemStorage for development, switch to DatabaseStorage for production
-// import { DatabaseStorage } from './database-storage';
-export const storage = new MemStorage();
+// Use DatabaseStorage for production
+import { DatabaseStorage } from './database-storage';
+export const storage = new DatabaseStorage();
