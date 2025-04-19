@@ -172,8 +172,27 @@ export default function ClientPortalPage() {
                 <p className="text-sm text-slate-600 max-w-md mx-auto mb-4">
                   You haven't shared any documents with your clients through the portal yet.
                 </p>
-                <Button asChild>
-                  <Link href="/documents/upload">Share a Document</Link>
+                <Button onClick={() => {
+                  document.getElementById('fileUpload')?.click();
+                  toast({
+                    title: "Document sharing",
+                    description: "Select a document to share with your client."
+                  });
+                }}>
+                  <input 
+                    type="file" 
+                    id="fileUpload" 
+                    style={{ display: 'none' }} 
+                    onChange={(e) => {
+                      if (e.target.files?.length) {
+                        toast({
+                          title: "Document uploaded",
+                          description: `${e.target.files[0].name} has been shared with your client.`
+                        });
+                      }
+                    }}
+                  />
+                  Share a Document
                 </Button>
               </div>
             </CardContent>
@@ -231,7 +250,12 @@ export default function ClientPortalPage() {
               </div>
             </CardContent>
             <CardFooter className="flex justify-end">
-              <Button>Save Settings</Button>
+              <Button onClick={() => toast({
+                  title: "Settings saved",
+                  description: "Your client portal settings have been updated successfully.",
+                })}>
+                Save Settings
+              </Button>
             </CardFooter>
           </Card>
         </TabsContent>

@@ -280,7 +280,9 @@ export default function PaymentsPage() {
                           <p className="text-xs text-slate-500">Accept Visa, Mastercard, Amex</p>
                         </div>
                       </div>
-                      <Badge className="bg-yellow-100 text-yellow-800">Not Connected</Badge>
+                      <Button variant="outline" size="sm">
+                        Connect
+                      </Button>
                     </div>
 
                     <div className="flex items-center justify-between p-4 bg-white rounded-md border border-slate-200">
@@ -291,7 +293,9 @@ export default function PaymentsPage() {
                           <p className="text-xs text-slate-500">Accept PayPal payments</p>
                         </div>
                       </div>
-                      <Badge className="bg-yellow-100 text-yellow-800">Not Connected</Badge>
+                      <Button variant="outline" size="sm">
+                        Connect
+                      </Button>
                     </div>
 
                     <div className="flex items-center justify-between p-4 bg-white rounded-md border border-slate-200">
@@ -302,7 +306,9 @@ export default function PaymentsPage() {
                           <p className="text-xs text-slate-500">Accept direct bank transfers</p>
                         </div>
                       </div>
-                      <Badge className="bg-yellow-100 text-yellow-800">Not Connected</Badge>
+                      <Button variant="outline" size="sm">
+                        Connect
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -331,7 +337,11 @@ export default function PaymentsPage() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button className="w-full">
+              <Button 
+                className="w-full"
+                onClick={() => window.open("https://dashboard.stripe.com/connect/accounts", "_blank")}
+              >
+                <i className="ri-link-m mr-2"></i>
                 Connect Payment Gateways
               </Button>
             </CardFooter>
